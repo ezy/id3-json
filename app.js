@@ -1,16 +1,17 @@
 const fs = require('fs-extra');
-const NodeID3 = require('node-id3');
 const moment = require('moment');
 const chalk = require('chalk');
-const _cliProgress = require('cli-progress');
+const nodeID3 = require('node-id3');
+
+const CliProgress = require('cli-progress');
 
 const mp3DirPath = './mp3';
-const progress = new _cliProgress.Bar({}, _cliProgress.Presets.shades_grey);
+const progress = new CliProgress.Bar({}, CliProgress.Presets.shades_classic);
 
 async function readDir() {
   try {
     const files = await fs.readdir(mp3DirPath);
-    console.log('Files read');
+    console.log(chalk.blue(' Files have been read \n'));
     return files;
   } catch (err) {
     console.error(err);
@@ -21,7 +22,7 @@ readDir().then((files) => {
   progress.start(files.length, 0);
   const output = files.map((file, i) => {
     progress.update(i);
-    const fileData = NodeID3.read(`${mp3DirPath}/${file}`);
+    const fileData = nodeID3.read(`${mp3DirPath}/${file}`);
     // console.log(fileData);
     return {
       title: fileData.title,
@@ -34,6 +35,6 @@ readDir().then((files) => {
       throw err;
     }
     progress.stop();
-    console.log(chalk.green('\n Process run complete - file saved to ./data.json'));
+    console.log(chalk.green('\n Process run complete'),chalk.blue('\n\n Output saved to ./data.json\n'));
   });
 });

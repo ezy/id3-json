@@ -16,6 +16,8 @@
   "author": "@ezy",
   "license": "MIT",
   "devDependencies": {
+    "chalk": "^2.4.1",
+    "cli-progress": "^2.1.0",
     "eslint": "^5.2.0",
     "eslint-plugin-import": "^2.13.0",
     "fs-extra": "^7.0.0",

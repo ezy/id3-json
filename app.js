@@ -1,8 +1,11 @@
 const fs = require('fs-extra');
 const NodeID3 = require('node-id3');
 const moment = require('moment');
+const chalk = require('chalk');
+const _cliProgress = require('cli-progress');
 
 const mp3DirPath = './mp3';
+const progress = new _cliProgress.Bar({}, _cliProgress.Presets.shades_grey);
 
 async function readDir() {
   try {
@@ -15,9 +18,10 @@ async function readDir() {
 }
 
 readDir().then((files) => {
-  const output = files.map((file) => {
+  progress.start(files.length, 0);
+  const output = files.map((file, i) => {
+    progress.update(i);
     const fileData = NodeID3.read(`${mp3DirPath}/${file}`);
-    console.log(fileData);
     return {
       title: fileData.title,
       speaker: fileData.artist,
@@ -28,6 +32,7 @@ readDir().then((files) => {
     if (err) {
       throw err;
     }
-    console.log('The file has been saved!');
+    progress.stop();
+    console.log(chalk.green('\n Process run complete - file saved to ./data.json'));
   });
 });

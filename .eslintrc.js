@@ -10,7 +10,7 @@ module.exports = {
   },
   "rules": {
     "comma-dangle": [2, "never"],
-    "no-console": 1,
+    "no-console": 0,
     "no-constant-condition": 2,
     "no-control-regex": 2,
     "no-debugger": 1,

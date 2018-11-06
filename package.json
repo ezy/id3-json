@@ -19,6 +19,7 @@
     "eslint": "^5.2.0",
     "eslint-plugin-import": "^2.13.0",
     "fs-extra": "^7.0.0",
+    "moment": "^2.22.2",
     "node-id3": "^0.1.7"
   }
 }

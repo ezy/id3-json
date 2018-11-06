@@ -1,5 +1,6 @@
 # Local
 mp3/*.mp3
+data.json
 
 # Logs
 logs

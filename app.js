@@ -14,7 +14,7 @@ async function readDir() {
     console.log(chalk.blue(' Files have been read \n'));
     return files;
   } catch (err) {
-    console.error(err);
+    console.error(chalk.red(err));
   }
 }
 

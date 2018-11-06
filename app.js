@@ -1,20 +1,25 @@
-const fs = require('fs');
+const fs = require('fs-extra');
+const NodeID3 = require('node-id3');
+
 const mp3DirPath = './mp3';
 
-const readFile = new Promise((res, rej) => {
-      fs.readdir(mp3DirPath, (err, items) => {
-        if (err) {
-          rej(err);
-        } else {
-          let resp = items.map((item) => item);
-          res(resp);
-        }
-      });
-    });
+// fs.readdir(mp3DirPath, (err, items) => {
+//   if (err) {
+//     rej(err);
+//   } else {
+//     let resp = items.map((item) => item);
+//     res(resp);
+//   }
+// });
 
+async function readDir() {
+  try {
+    const files = await fs.readdir(mp3DirPath);
+    console.log('Files read');
+    return files;
+  } catch (err) {
+    console.error(err);
+  }
+}
 
-readFile.then((v) => {
-  console.log(v[0]);
-});
-
-console.log(readFile);
+readDir().then((files) => console.log('boom', files[0]));

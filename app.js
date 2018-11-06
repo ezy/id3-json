@@ -22,6 +22,7 @@ readDir().then((files) => {
   const output = files.map((file, i) => {
     progress.update(i);
     const fileData = NodeID3.read(`${mp3DirPath}/${file}`);
+    // console.log(fileData);
     return {
       title: fileData.title,
       speaker: fileData.artist,

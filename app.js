@@ -32,6 +32,7 @@ readDir().then((files) => {
   });
   fs.writeFile('data.json', JSON.stringify(output), 'utf8', (err) => {
     if (err) {
+      console.error(chalk.red(err));
       throw err;
     }
     progress.stop();

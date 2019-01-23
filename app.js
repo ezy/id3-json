@@ -22,12 +22,17 @@ readDir().then((files) => {
   progress.start(files.length, 0);
   const output = files.map((file, i) => {
     progress.update(i);
+    const stats = fs.statSync(`${mp3DirPath}/${file}`);
     const fileData = nodeID3.read(`${mp3DirPath}/${file}`);
     // console.log(fileData);
     return {
       title: fileData.title,
       speaker: fileData.artist,
-      date: moment(file.replace(/\D+/g, ''), 'YYYYMMDD')
+      date: moment(file.replace(/\D+/g, ''), 'YYYYMMDD'),
+      image: '/assets/img/audio.jpg',
+      status: 'published',
+      fileUrl: `https://s3-us-west-2.amazonaws.com/newseed-prod/sermons/olive-tree/${file}`,
+      fileSize: stats.size
     };
   });
   fs.writeFile('data.json', JSON.stringify(output), 'utf8', (err) => {
